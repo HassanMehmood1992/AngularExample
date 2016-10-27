@@ -1,0 +1,20 @@
+<div class="container">
+ 	<div class="jumbotron">
+   		 <h1>Bootstrap Home</h1> 
+   		 <p>This is the root/header template of home page and will be present in all the child views </p> 
+  	</div>
+ 	<div class="jumbotron">
+	   <ul class="nav nav-pills">
+		  <li role="presentation" ng-click="home = 1" ng-class="{active:home == 1}"><a href="#/home/info">Home info</a></li>
+		  <li role="presentation" ng-click="home = 2" ng-class="{active:home == 2}"><a ui-sref="home.table">home table</a></li>
+		  <li role="presentation"><a href="#/categories">Go to categories</a></li>
+		</ul>
+ 	</div>
+ 	<div class="jumbotron">
+	    <div ui-view></div>
+ 	</div>
+	<div class="jumbotron">
+	    <h1>Bootstrap footer</h1> 
+	    <p>This is the root/footer template of home page and will be present in all the child views </p> 
+	</div>
+</div>
