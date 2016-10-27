@@ -57,6 +57,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
 .controller("HomeInfoCtrl",function ($scope,$rootScope,$location) {
   // body...
     $scope.$parent.home = 1
+    $scope.UserA = {}
+    $scope.UserB = {}
+    $scope.UserA.FirstName = "Hassan";
+    $scope.UserB.FirstName = "Bilal";
+
+    $scope.UserA.LastName = "Hassan";
+    $scope.UserB.LastName = "Bilal";
+
+
+    $scope.html = "<h1>HASSAN</h1>";
    
   
 })
@@ -79,5 +89,54 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
        
     }
+})
+.directive('userinfo', function() {
+        var directive = {};
+
+        directive.restrict = 'EA'; /* restrict this directive to elements */
+        directive.scope = {
+        user : "=user",
+        userClick:'&'
+        }
+        directive.compile = function(element, attributes) {
+            element.css("border", "1px solid #cccccc");
+
+            var linkFunction = function($scope, element, attributes) {
+                element.html("First Name: " + $scope.user.FirstName + "<br> Last Name: " + $scope.user.LastName);
+                element.css("background-color", "#ffff00");
+
+            }
+
+            return linkFunction;
+        }
+
+        return directive;
+})
+// .directive('htmlRender', function($compile) {
+//   return {
+//     restrict: 'E',
+//     scope: { html: '@' },
+//     link: function(scope, element) {
+//       scope.$watch('html', function(value) {
+//         if (!value) return;
+
+//         var markup = $compile(value)(scope);
+//         element.append(markup);
+//       });
+//     }
+//   };
+// });
+//        
+.directive('dynamic', function ($compile) {
+  return {
+    restrict: 'A',
+    replace: false, // http://stackoverflow.com/questions/15285635/how-to-use-replace-of-directive-definition
+    link: function (scope, ele, attrs) {
+      scope.$watch(attrs.dynamic, function(html) {
+        ele.html(html);
+        $compile(ele.contents())(scope);
+      });
+    }
+  };
 });
         
